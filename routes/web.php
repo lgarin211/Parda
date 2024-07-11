@@ -17,6 +17,8 @@ use App\Http\Controllers\AuthPoinController;
 Route::get('/', function () {
     return view('Templates.InventLayout');
 });
-Route::any('/login',[AuthPoinController::class, 'LoginViewPoin']);
-Route::any('/register',[AuthPoinController::class, 'RegisterViewPoin']);
-Route::any('/Employe',[AuthPoinController::class, 'Employe']);
+Route::any('/login',[AuthPoinController::class, 'LoginViewPoin'])->name('login');
+Route::any('/register',[AuthPoinController::class, 'RegisterViewPoin'])->name('register');
+Route::any('/Employe',[AuthPoinController::class, 'Employe'])->name('employe');
+Route::any('/kasir',[AuthPoinController::class, 'kasir'])->name('kasir');
+

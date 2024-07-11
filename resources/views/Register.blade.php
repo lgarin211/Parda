@@ -42,7 +42,7 @@
                         {{-- button login --}}
                         <div class="col-12">
                             <div class="form-group mt-3">
-                                <button type="submit" class="btn btn-primary col-12">Login</button>
+                                <a href="{{ route('employe') }}" class="btn btn-primary col-12">Login</a>
                             </div>
                         </div>
 

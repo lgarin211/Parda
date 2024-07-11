@@ -1,6 +1,6 @@
 @extends('Templates.InventLayout')
 @section('content')
-    <div class="card col-12" style="width: 75dvh">
+    <div class="card col-12">
         <div class="card-header">
             Add Employe
         </div>
@@ -16,7 +16,7 @@
         </ul>
     </div>
 
-    <div class="card col-12 mt-2" style="width: 75dvh">
+    <div class="card col-12 mt-4">
         <div class="card-header">
             Employer List
         </div>
@@ -31,17 +31,18 @@
                         </tr>
                     </thead>
                     <tbody class="mt-1">
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>
-                                <div class="row">
-                                    <button class="btn btn-warning">Edit</button>
-                                    <button class="btn btn-danger">Delete</button>
-                                </div>
-                            </td>
-                        </tr>
+                        @for ($i = 0; $i < 10; $i++)
+                            <tr>
+                                <th scope="row">{{ $i }}</th>
+                                <td>{{ fake()->name }}</td>
+                                <td>
+                                    <div class="row">
+                                        <button class="btn btn-warning">Edit</button>
+                                        <button class="btn btn-danger">Delete</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endfor
                     </tbody>
                 </table>
             </div>

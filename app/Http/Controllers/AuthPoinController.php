@@ -16,5 +16,10 @@ class AuthPoinController extends Controller
     function Employe() {
         return view('Employe');
     }
+
+    function Kasir() {
+        // dd('aabalin');
+        return view('Kasir');
+    }
 }
 
