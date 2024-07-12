@@ -21,4 +21,9 @@ Route::any('/login',[AuthPoinController::class, 'LoginViewPoin'])->name('login')
 Route::any('/register',[AuthPoinController::class, 'RegisterViewPoin'])->name('register');
 Route::any('/Employe',[AuthPoinController::class, 'Employe'])->name('employe');
 Route::any('/kasir',[AuthPoinController::class, 'kasir'])->name('kasir');
-
+Route::get('/SalesForm', function () {
+    return view('SalesForm');
+})->name('SalesForm');
+Route::get('/OwnerForm', function () {
+    return view('OwnerForm');
+})->name('OwnerForm');

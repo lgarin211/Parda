@@ -51,6 +51,9 @@
     </div>
 
     <div class="main-content">
+        <div class="col">
+            <h2>{{ 'Admin Pages' }} @yield('title')</h2>
+        </div>
         <div class="container-fluid">
             @yield('content')
             @yield('content2')
