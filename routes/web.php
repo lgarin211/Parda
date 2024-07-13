@@ -15,15 +15,15 @@ use App\Http\Controllers\AuthPoinController;
 */
 
 Route::get('/', function () {
-    return view('Templates.InventLayout');
+    return view('Templates.LTELayout');
 });
 Route::any('/login',[AuthPoinController::class, 'LoginViewPoin'])->name('login');
 Route::any('/register',[AuthPoinController::class, 'RegisterViewPoin'])->name('register');
-Route::any('/Admin/Employe',[AuthPoinController::class, 'Employe'])->name('employe');
-Route::any('/Admin/kasir',[AuthPoinController::class, 'kasir'])->name('kasir');
-Route::get('/Admin/SalesForm', function () {
-    return view('SalesForm');
+Route::any('/Employe',[AuthPoinController::class, 'Employe'])->name('employe');
+Route::any('/kasir',[AuthPoinController::class, 'kasir'])->name('kasir');
+Route::get('/SalesForm', function () {
+    return view('Admin/SalesForm');
 })->name('SalesForm');
-Route::get('/Admin/OwnerForm', function () {
-    return view('OwnerForm');
+Route::get('/OwnerForm', function () {
+    return view('Admin/OwnerForm');
 })->name('OwnerForm');

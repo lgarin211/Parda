@@ -1,4 +1,4 @@
-@extends('Templates.InventLayout')
+@extends('Templates.LTELayout')
 @section('content')
     <style>
         .custom-card {
