@@ -19,11 +19,11 @@ Route::get('/', function () {
 });
 Route::any('/login',[AuthPoinController::class, 'LoginViewPoin'])->name('login');
 Route::any('/register',[AuthPoinController::class, 'RegisterViewPoin'])->name('register');
-Route::any('/Employe',[AuthPoinController::class, 'Employe'])->name('employe');
-Route::any('/kasir',[AuthPoinController::class, 'kasir'])->name('kasir');
-Route::get('/SalesForm', function () {
+Route::any('/Admin/Employe',[AuthPoinController::class, 'Employe'])->name('employe');
+Route::any('/Admin/kasir',[AuthPoinController::class, 'kasir'])->name('kasir');
+Route::get('/Admin/SalesForm', function () {
     return view('SalesForm');
 })->name('SalesForm');
-Route::get('/OwnerForm', function () {
+Route::get('/Admin/OwnerForm', function () {
     return view('OwnerForm');
 })->name('OwnerForm');
