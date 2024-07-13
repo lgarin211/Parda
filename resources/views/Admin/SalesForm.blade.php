@@ -1,25 +1,20 @@
 @extends('Templates.LTELayout')
+
+@section('header')
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Employe</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+@endsection
+
 @section('content')
-    <style>
-        .custom-card {
-            background-color: #d3d3d3;
-            padding: 20px;
-            border-radius: 10px;
-            max-width: 600px;
-            margin: auto;
-        }
-
-        .custom-card input,
-        .custom-card textarea {
-            margin-bottom: 15px;
-        }
-
-        .custom-file-input {
-            height: 100px;
-        }
-    </style>
-    <div class="container mt-5">
-        <div class="custom-card">
+    <div class="container mt-5 card">
+        <div class="card-body">
             <div class="mb-3">
                 <label for="sales" class="form-label">SALES</label>
                 <input type="text" class="form-control" id="sales">
@@ -58,7 +53,7 @@
             </div>
             <div class="mt-3">
                 <label for="photoBarang" class="form-label">Photo Barang</label>
-                <input type="file" class="form-control custom-file-input" id="photoBarang">
+                <input type="file" class="form-control col-12" id="photoBarang">
             </div>
             <button class="btn btn-primary mt-3">SIMPAN</button>
         </div>

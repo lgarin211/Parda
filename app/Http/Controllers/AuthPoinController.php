@@ -7,14 +7,22 @@ use Illuminate\Http\Request;
 class AuthPoinController extends Controller
 {
     function LoginViewPoin() {
-        return view('Admin/Login');
+        return view('Login');
     }
     function RegisterViewPoin(){
-        return view('Admin/Register');
+        return view('Register');
     }
 
-    function Employe() {
-        return view('Admin/Employe');
+    function BarangMasuk() {
+        return view('Admin/BarangMasuk');
+    }
+    function Barang() {
+        return view('Admin/Barang');
+    }
+
+
+    function OwenerAccess() {
+        return view('Admin/OwenerAccess');
     }
 
     function Kasir() {

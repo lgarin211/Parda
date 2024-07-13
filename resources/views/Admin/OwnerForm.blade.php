@@ -6,7 +6,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Employe</h1>
+                    <h1>Edit Data Owner</h1>
                 </div>
             </div>
         </div>
@@ -41,6 +41,9 @@
                             <label for="password" class="form-label">Password:</label>
                             <input type="password" class="form-control" id="password" value="*******" readonly>
                         </div>
+                        <h1>
+                            <hr>
+                        </h1>
                         <div class="mb-3">
                             <label for="newOwnerName" class="form-label">New Owner Name:</label>
                             <input type="text" class="form-control" id="newOwnerName" placeholder="John Doe">

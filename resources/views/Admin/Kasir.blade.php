@@ -14,11 +14,11 @@
 
 
 @section('content')
-    <section class="content">
+    <section class="content row">
 
-        <div class="card">
+        <div class="col-6 card">
             <div class="card-header">
-                <h3 class="card-title">Data Owner</h3>
+                <h3 class="card-title">Kasir</h3>
                 <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                         <i class="fas fa-minus"></i>
@@ -28,7 +28,7 @@
             <div class="card-body">
                 <div class="col-12">
                     <h3>
-                        Add Employe
+                        Sales Input Item
                     </h3>
                     <ul class="list-group list-group-flush">
                         <div class="row">
@@ -45,9 +45,8 @@
                                 <input type="text" class="col-12 form-control" placeholder="Enter Item Discount(%)">
                             </div>
                             <div class="col-12 mt-2">
-                                <input type="text" readonly class="col-12 form-control" placeholder="TOtal">
+                                <input type="text" readonly class="col-12 form-control" placeholder="Total">
                             </div>
-
                             <div class="col-12">
                                 <button class="btn btn-primary col-12 mt-2">Submit</button>
                             </div>
@@ -60,9 +59,9 @@
             </div>
         </div>
 
-        <div class="card">
+        <div class="col-6 card">
             <div class="card-header">
-                <h3 class="card-title">Summery</h3>
+                <h3 class="card-title">Card Summery</h3>
                 <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                         <i class="fas fa-minus"></i>
@@ -96,7 +95,8 @@
                                             <td>{{ 0 }}</td>
                                             <td>
                                                 <div class="row">
-                                                    <button class="btn btn-warning">Edit</button>
+                                                    <button class="btn btn-warning" data-toggle="modal"
+                                                        data-target="#CardSummeryPoin{{ $i }}">Edit</button>
                                                     <button class="btn btn-danger">Delete</button>
                                                 </div>
                                             </td>
@@ -104,6 +104,9 @@
                                     @endfor
                                 </tbody>
                             </table>
+                            <button class="btn btn-primary col-12" data-toggle="modal" data-target="#ModalTagPoinofCekhout">
+                                Chekout
+                            </button>
                         </div>
                     </ul>
                 </div>
@@ -113,4 +116,51 @@
 
 
     </section>
+@endsection
+
+
+@section('content2')
+    @for ($i = 0; $i < 10; $i++)
+        <!-- Modal -->
+        <div class="modal fade" id="CardSummeryPoin{{ $i }}" tabindex="-1"
+            aria-labelledby="CardSummeryPoin{{ $i }}Label" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="CardSummeryPoin{{ $i }}Label">{{ $i }}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        ...
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endfor
+    <div class="modal fade" id="ModalTagPoinofCekhout" tabindex="-1" aria-labelledby="ModalTagPoinofCekhoutLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ModalTagPoinofCekhoutLabel">Powerlist</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
