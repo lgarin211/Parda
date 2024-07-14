@@ -23,7 +23,12 @@
             <!-- Left navbar links -->
             <ul class="navbar-nav">
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="#" class="nav-link">Welcome @yield('pagesTitle')</a>
+                    @if (url()->previous() != url()->current())
+                        <a href="{{ url()->previous() }}" class="nav-link">
+                            <i class="fas fa-arrow-left"></i>
+                        </a>
+                    @endif
+
                 </li>
             </ul>
 

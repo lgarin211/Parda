@@ -6,28 +6,43 @@ use Illuminate\Http\Request;
 
 class AuthPoinController extends Controller
 {
-    function LoginViewPoin() {
+    public function SalesForm() {
+        return view('Admin.SalesForm');
+    }
+
+    public function OwnerForm() {
+        return view('Admin.OwnerForm');
+    }
+
+    public function Laporan() {
+        return view('Owener.Laporan');
+    }
+
+    public function DetailLaporan() {
+        return view('Owener.LaporanDetail');
+    }
+    public function LoginViewPoin() {
         return view('Login');
     }
-    function RegisterViewPoin(){
+
+    public function RegisterViewPoin() {
         return view('Register');
     }
 
-    function BarangMasuk() {
-        return view('Admin/BarangMasuk');
-    }
-    function Barang() {
-        return view('Admin/Barang');
+    public function BarangMasuk() {
+        return view('Admin.BarangMasuk');
     }
 
-
-    function OwenerAccess() {
-        return view('Admin/OwenerAccess');
+    public function Barang() {
+        return view('Admin.Barang');
     }
 
-    function Kasir() {
-        // dd('aabalin');
-        return view('Admin/Kasir');
+    public function OwenerAccess() {
+        return view('Admin.OwenerAccess');
+    }
+
+    public function kasir() {
+        return view('Admin.Kasir');
     }
 }
 

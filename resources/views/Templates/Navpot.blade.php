@@ -29,6 +29,8 @@
         <li class="nav-item">
             <a class="nav-link ml-2" href="{{ route('OwenerAccess') }}"><i class="far fa-circle nav-icon"></i> Data
                 Owner</a>
+            <a class="nav-link ml-2" href="{{ route('DetailLaporan') }}"><i class="far fa-circle nav-icon"></i>
+                Laporan</a>
         </li>
 
     </ul>

@@ -25,7 +25,7 @@
                 </select>
             </div>
             <div class="col-12 mt-2">
-                <div class="row">
+                <div class="row" style="max-height: 50dvh;overflow: scroll;">
                     @for ($i = 1; $i <= 31; $i++)
                         <div class="col-4">
                             <div class="card col-12">
@@ -33,7 +33,7 @@
                                     <h5 class="card-title">Day {{ $i }}</h5>
                                     <p class="card-text">sles poin in day 1 is $</p>
                                     <a href="#" class="card-link">Employe</a>
-                                    <a href="#" class="card-link btn btn-primary">See Detail</a>
+                                    <a href="{{ url('/DetailLaporan') }}" class="card-link btn btn-primary">See Detail</a>
                                 </div>
                             </div>
                         </div>

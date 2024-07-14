@@ -17,21 +17,14 @@ use App\Http\Controllers\AuthPoinController;
 Route::get('/', function () {
     return view('Templates.LTELayout');
 });
-Route::any('/login',[AuthPoinController::class, 'LoginViewPoin'])->name('login');
-Route::any('/register',[AuthPoinController::class, 'RegisterViewPoin'])->name('register');
-Route::any('/BarangMasuk',[AuthPoinController::class, 'BarangMasuk'])->name('BarangMasuk');
-Route::any('/Barang',[AuthPoinController::class, 'Barang'])->name('Barang');
 
-Route::any('/OwenerAccess',[AuthPoinController::class, 'OwenerAccess'])->name('OwenerAccess');
-
-Route::any('/kasir',[AuthPoinController::class, 'kasir'])->name('kasir');
-Route::get('/SalesForm', function () {
-    return view('Admin/SalesForm');
-})->name('SalesForm');
-Route::get('/OwnerForm', function () {
-    return view('Admin/OwnerForm');
-})->name('OwnerForm');
-
-Route::get('/Laporan', function () {
-    return view('Owener.Laporan');
-})->name('Laporan');
+Route::get('/login', [AuthPoinController::class, 'LoginViewPoin'])->name('login');
+Route::get('/register', [AuthPoinController::class, 'RegisterViewPoin'])->name('register');
+Route::get('/BarangMasuk', [AuthPoinController::class, 'BarangMasuk'])->name('BarangMasuk');
+Route::get('/Barang', [AuthPoinController::class, 'Barang'])->name('Barang');
+Route::get('/OwenerAccess', [AuthPoinController::class, 'OwenerAccess'])->name('OwenerAccess');
+Route::get('/kasir', [AuthPoinController::class, 'kasir'])->name('kasir');
+Route::get('/SalesForm', [AuthPoinController::class, 'SalesForm'])->name('SalesForm');
+Route::get('/OwnerForm', [AuthPoinController::class, 'OwnerForm'])->name('OwnerForm');
+Route::get('/Laporan', [AuthPoinController::class, 'Laporan'])->name('Laporan');
+Route::get('/DetailLaporan', [AuthPoinController::class, 'DetailLaporan'])->name('DetailLaporan');
