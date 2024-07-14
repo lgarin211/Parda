@@ -1,4 +1,3 @@
-!
 @extends('Templates.LTELayout')
 
 @section('header')
