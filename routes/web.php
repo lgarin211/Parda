@@ -22,7 +22,7 @@ Route::any('/login', [AuthPoinController::class, 'LoginViewPoin'])->name('login'
 Route::any('/register', [AuthPoinController::class, 'RegisterViewPoin'])->name('register');
 Route::any('/BarangMasuk', [AuthPoinController::class, 'BarangMasuk'])->name('BarangMasuk');
 Route::any('/Barang', [AuthPoinController::class, 'Barang'])->name('Barang');
-Route::any('/OwenerAccess', [AuthPoinController::class, 'OwenerAccess'])->name('OwenerAccess');
+Route::any('/OwnerAccess', [AuthPoinController::class, 'OwnerAccess'])->name('OwenerAccess');
 Route::any('/kasir', [AuthPoinController::class, 'kasir'])->name('kasir');
 Route::any('/SalesForm', [AuthPoinController::class, 'SalesForm'])->name('SalesForm');
 Route::any('/OwnerForm', [AuthPoinController::class, 'OwnerForm'])->name('OwnerForm');

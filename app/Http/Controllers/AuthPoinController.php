@@ -25,11 +25,11 @@ class AuthPoinController extends Controller
     }
 
     public function Laporan() {
-        return view('Owner.Laporan');
+        return view('Owener.Laporan');
     }
 
     public function DetailLaporan() {
-        return view('Owner.LaporanDetail');
+        return view('Owener.LaporanDetail');
     }
 
     public function LoginViewPoin(Request $request) {
@@ -62,7 +62,7 @@ class AuthPoinController extends Controller
     }
 
     public function OwnerAccess() {
-        return view('Admin.OwnerAccess');
+        return view('Admin.OwenerAccess');
     }
 
     public function kasir(Request $request) {
@@ -75,7 +75,6 @@ class AuthPoinController extends Controller
                 'nama_produk'=>$request->name,
             ];
             $barang=self::$data->getInventories()->where($req)->first();
-            // dd($barang);
             if($barang){
                 $pw=(session('barang'))?session('barang'):[];
                 $barang->jumlah=$request->qty;
