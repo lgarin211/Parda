@@ -25,6 +25,7 @@ class AuthPoinController extends Controller
     }
 
     public function Laporan() {
+        dd(self::$data->PenjualanData()->get());
         return view('Owener.Laporan');
     }
 
