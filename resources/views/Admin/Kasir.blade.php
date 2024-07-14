@@ -31,29 +31,33 @@
                         Sales Input Item
                     </h3>
                     <ul class="list-group list-group-flush">
-                        <div class="row">
-                            <div class="col-12 mt-2">
-                                <input type="text" class="col-12 form-control" placeholder="Enter Item Name">
+                        <form method="POST">
+                            @csrf
+                            <div class="row">
+                                <div class="col-12 mt-2">
+                                    <input name="name" type="text" class="col-12 form-control"
+                                        placeholder="Enter Item Name">
+                                </div>
+                                <div class="col-12 mt-2">
+                                    <input name="qua" type="text" class="col-12 form-control"
+                                        placeholder="Enter Item Quality" value="good">
+                                </div>
+                                <div class="col-12 mt-2">
+                                    <input name="qty" type="text" class="col-12 form-control"
+                                        placeholder="Enter Item Quantity" value="1">
+                                </div>
+                                <div class="col-12 mt-2">
+                                    <input name="dis" value="0" type="number" class="col-12 form-control"
+                                        placeholder="Enter Item Discount(%)">
+                                </div>
+                                <div class="col-12">
+                                    <button class="btn btn-primary col-12 mt-2" type="submit">Submit</button>
+                                </div>
+                                <div class="col-12">
+                                    <a class="btn btn-danger col-12 mt-2" href="{{ route('kasir') }}?locup=1">Cancel</a>
+                                </div>
                             </div>
-                            <div class="col-12 mt-2">
-                                <input type="text" class="col-12 form-control" placeholder="Enter Item Quality">
-                            </div>
-                            <div class="col-12 mt-2">
-                                <input type="text" class="col-12 form-control" placeholder="Enter Item Price">
-                            </div>
-                            <div class="col-12 mt-2">
-                                <input type="text" class="col-12 form-control" placeholder="Enter Item Discount(%)">
-                            </div>
-                            <div class="col-12 mt-2">
-                                <input type="text" readonly class="col-12 form-control" placeholder="Total">
-                            </div>
-                            <div class="col-12">
-                                <button class="btn btn-primary col-12 mt-2">Submit</button>
-                            </div>
-                            <div class="col-12">
-                                <button class="btn btn-danger col-12 mt-2">Cancel</button>
-                            </div>
-                        </div>
+                        </form>
                     </ul>
                 </div>
             </div>
@@ -71,7 +75,7 @@
             <div class="card-boddy">
                 <div class="col-12">
                     <ul class="list-group list-group-flush">
-                        <div class="row">
+                        <div class="row" style="height: 50dvh;overflow-y: scroll;">
                             <table class="table">
                                 <thead>
                                     <tr>
@@ -85,29 +89,32 @@
                                     </tr>
                                 </thead>
                                 <tbody class="mt-1">
-                                    @for ($i = 0; $i < 10; $i++)
-                                        <tr>
-                                            <th scope="row">{{ $i }}</th>
-                                            <td>{{ fake()->word(4) }}</td>
-                                            <td>{{ 'good' }}</td>
-                                            <td>{{ 100 * $i }}</td>
-                                            <td>{{ '20%' }}</td>
-                                            <td>{{ 0 }}</td>
-                                            <td>
-                                                <div class="row">
-                                                    <button class="btn btn-warning" data-toggle="modal"
-                                                        data-target="#CardSummeryPoin{{ $i }}">Edit</button>
-                                                    <button class="btn btn-danger">Delete</button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    @endfor
+                                    @if ($dsv)
+                                        @foreach ($dsv as $i => $item)
+                                            <tr>
+                                                <th scope="row">{{ $i }}</th>
+                                                <td>{{ $item->nama_produk }}</td>
+                                                <td>{{ $item->condition }}</td>
+                                                <td>{{ $item->harga }}</td>
+                                                <td>{{ $item->disc }}%</td>
+                                                <td>{{ $item->pricetotal }}</td>
+                                                <td>
+                                                    <div class="row">
+                                                        <button class="btn btn-warning" data-toggle="modal"
+                                                            data-target="#CardSummeryPoin{{ $i }}">Edit</button>
+                                                        <button class="btn btn-danger">Delete</button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    @endif
                                 </tbody>
                             </table>
-                            <button class="btn btn-primary col-12" data-toggle="modal" data-target="#ModalTagPoinofCekhout">
-                                Chekout
-                            </button>
                         </div>
+                        <button class="btn btn-primary col-12 mt-1" data-toggle="modal"
+                            data-target="#ModalTagPoinofCekhout">
+                            Chekout
+                        </button>
                     </ul>
                 </div>
             </div>

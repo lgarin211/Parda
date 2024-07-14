@@ -14,6 +14,7 @@ class UsersTableSeeder extends Seeder
         $faker = Faker::create();
         for ($i = 0; $i < 10; $i++) {
             DB::table('users')->insert([
+                'email' => $faker->email,
                 'nama_user' => $faker->name,
                 'password' => Hash::make('password'),
                 'created_at' => now(),

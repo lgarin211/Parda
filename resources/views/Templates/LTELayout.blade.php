@@ -58,8 +58,8 @@
                     </div>
                     <div class="info">
                         <a href="#" class="d-block">
-                            @if (session('status'))
-                                {{ session('status') }}
+                            @if (session('user')->nama_user)
+                                {{ session('user')->nama_user }}
                             @else
                                 Arda
                             @endif

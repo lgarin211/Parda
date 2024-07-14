@@ -6,27 +6,31 @@
                 <div class="col-12 text-center">
                     <h1>Login</h1>
                 </div>
-                <form action="">
+                <form method="POST">
+                    @csrf
                     <div class="row align-items-center justify-content-center">
                         {{-- input email --}}
                         <div class="col-12">
                             <div class="form-group mt-3">
                                 <label for="email">Email</label>
-                                <input type="email" class="form-control" id="email" placeholder="Email">
+                                <input type="email" class="form-control" id="email" placeholder="Email"
+                                    name="email">
                             </div>
                         </div>
                         {{-- input password --}}
                         <div class="col-12">
                             <div class="form-group mt-3">
                                 <label for="password">Password</label>
-                                <input type="password" class="form-control" id="password" placeholder="Password">
+                                <input type="password" class="form-control" id="password" placeholder="Password"
+                                    name="password">
                             </div>
                         </div>
 
                         {{-- button login --}}
                         <div class="col-12">
                             <div class="form-group mt-3">
-                                <a href="{{ Route('kasir') }}" class="btn btn-primary col-12">Login</a>
+                                <button type="submit" href="{{ Route('kasir') }}"
+                                    class="btn btn-primary col-12">Login</button>
                             </div>
                         </div>
 

@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
             UsersTableSeeder::class,
             UserRolesTableSeeder::class,
             TokosTableSeeder::class,
-         // PenjualansTableSeeder::class,
+            PenjualansTableSeeder::class,
             PenjualanProduksTableSeeder::class,
             ProduksTableSeeder::class,
             UserTokosTableSeeder::class,

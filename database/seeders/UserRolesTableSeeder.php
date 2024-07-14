@@ -11,8 +11,8 @@ class UserRolesTableSeeder extends Seeder
     {
         for ($i = 0; $i < 10; $i++) {
             DB::table('user_roles')->insert([
-                'id_user' => rand(1, 10),
-                'id_role' => rand(1, 10),
+                'id_user' => $i+1,
+                'id_role' => rand(1,3),
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);

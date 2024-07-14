@@ -26,21 +26,21 @@
                             </tr>
                         </thead>
                         <tbody class="mt-1">
-                            @for ($i = 0; $i < 10; $i++)
+                            @foreach ($dataBarang as $i => $item)
                                 <tr>
-                                    <th scope="row">{{ $i }}</th>
-                                    <td>{{ fake()->name }}</td>
-                                    <td>{{ 'good' }}</td>
-                                    <td>{{ 100 * $i }}</td>
-                                    <td>{{ '20%' }}</td>
+                                    <th scope="row">{{ $i + 1 }}</th>
+                                    <td>{{ $item->nama_produk }}</td>
+                                    <td>{{ $item->stock_tersedia }}</td>
+                                    <td>{{ $item->satuan }}</td>
+                                    <td>{{ $item->harga }}</td>
                                     <td>
                                         <div class="row">
-                                            <button class="btn btn-warning">Edit</button>
-                                            <button class="btn btn-danger">Delete</button>
+                                            <button class="btn btn-warning p-1">Edit</button>
+                                            <button class="btn btn-danger p-2">Delete</button>
                                         </div>
                                     </td>
                                 </tr>
-                            @endfor
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

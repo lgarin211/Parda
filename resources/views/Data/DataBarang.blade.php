@@ -28,15 +28,16 @@
                                 </tr>
                             </thead>
                             <tbody class="mt-1">
-                                @for ($i = 0; $i < 10; $i++)
+                                @foreach ($dataBarang as $i => $item)
                                     <tr>
-                                        <th scope="row">{{ $i }}</th>
-                                        <td>{{ fake()->name }}</td>
-                                        <td>{{ 'good' }}</td>
-                                        <td>{{ 100 * $i }}</td>
-                                        <td>{{ '20%' }}</td>
-                                        <td>{{ 0 }}</td>
-                                        <td>{{ '20%' }}</td>
+                                        <th scope="row">{{ $i + 1 }}</th>
+                                        <td>{{ $item->nama_produk }}</td>
+                                        <td>{{ $item->stock_tersedia }}</td>
+                                        <td>{{ $item->satuan }}</td>
+                                        <td>{{ $item->harga }}</td>
+                                        <td>{{ $item->harga * $item->stock_tersedia }}</td>
+                                        <td>{{ $item->status = $item->stock_tersedia <= $item->stock_keluar ? 'Habis' : 'Tersedia' }}
+                                        </td>
                                         <td>
                                             <div class="row">
                                                 <button class="btn btn-warning">Edit</button>
@@ -44,7 +45,7 @@
                                             </div>
                                         </td>
                                     </tr>
-                                @endfor
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

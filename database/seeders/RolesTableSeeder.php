@@ -10,10 +10,10 @@ class RolesTableSeeder extends Seeder
 {
     public function run()
     {
-        $roles = ['Admin', 'User', 'Manager', 'Supervisor', 'Staff'];
-        for ($i = 0; $i < 10; $i++) {
+        $roles = ['Admin', 'Owner','Staff'];
+        for ($i = 0; $i < 3; $i++) {
             DB::table('roles')->insert([
-                'nama_role' => $roles[array_rand($roles)],
+                'nama_role' => $roles[$i],
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
