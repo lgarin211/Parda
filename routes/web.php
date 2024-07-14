@@ -28,3 +28,5 @@ Route::get('/SalesForm', [AuthPoinController::class, 'SalesForm'])->name('SalesF
 Route::get('/OwnerForm', [AuthPoinController::class, 'OwnerForm'])->name('OwnerForm');
 Route::get('/Laporan', [AuthPoinController::class, 'Laporan'])->name('Laporan');
 Route::get('/DetailLaporan', [AuthPoinController::class, 'DetailLaporan'])->name('DetailLaporan');
+
+Route::get('/Datalist', [AuthPoinController::class, 'Datalist'])->name('Datalist');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\DataController as Data;
 
 class AuthPoinController extends Controller
 {
@@ -43,6 +44,12 @@ class AuthPoinController extends Controller
 
     public function kasir() {
         return view('Admin.Kasir');
+    }
+
+    function Datalist(){
+        $Data = new Data();
+        dd($Data->getSales());
+        return view('Admin.Datalist');
     }
 }
 
