@@ -31,3 +31,7 @@ Route::get('/SalesForm', function () {
 Route::get('/OwnerForm', function () {
     return view('Admin/OwnerForm');
 })->name('OwnerForm');
+
+Route::get('/Laporan', function () {
+    return view('Owener.Laporan');
+})->name('Laporan');
