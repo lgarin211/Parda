@@ -46,7 +46,7 @@ class AuthPoinController extends Controller
             $laporan=self::$data->PenjualanData()->where('toko_id',session('user')->id_toko)->get();
         }
 
-        return view('Owener.Laporan',compact('laporan','tanggalTerdesia','totalBesa','totalpemasukanHrian'));
+        return view('Owener.Laporan',compact('laporan','tanggalTerdesia','totalpemasukanHrian'));
     }
 
     public function DetailLaporan(Request $request) {
