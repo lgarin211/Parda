@@ -11,9 +11,9 @@
         </div>
         <div class="card-body">
             <div class="col-5 mb-2">
-                <a href="#" class="btn btn-primary col-12">Print</a>
+                <a href="#" class="btn btn-primary col-12" onclick="getsetprint()">Print</a>
             </div>
-            <div class="col-12">
+            <div class="col-12" id="datalist">
                 <ul class="list-group list-group-flush">
                     <div class="row">
                         <table class="table col-12">
@@ -28,16 +28,21 @@
                                 </tr>
                             </thead>
                             <tbody class="mt-1">
-                                @for ($i = 0; $i < 10; $i++)
+                                @foreach ($laporan as $i => $item)
+                                    {{-- @dd($item) --}}
                                     <tr>
-                                        <th scope="row">{{ $i }}</th>
-                                        <td>{{ fake()->name }}</td>
-                                        <td>{{ 'good' }}</td>
-                                        <td>{{ 100 * $i }}</td>
-                                        <td>{{ '20%' }}</td>
-                                        <td>{{ 0 }}</td>
+                                        <th scope="row">{{ $i + 1 }}</th>
+                                        <td>{{ $item->produk_nama }}</td>
+                                        <td>{{ 1 }}</td>
+                                        <td>{{ $item->produk_harga }}</td>
+                                        <td>{{ $item->produk_harga * 1 }}</td>
+                                        {{-- 2024-07-15 02:44:48 --}}
+                                        <td>{{ // set in jam dan menit
+                                            // date('H', strtotime($item->penjualan_tanggal)) - 7 . ':' . date('i', strtotime($item->penjualan_tanggal))
+                                            date('H:i', strtotime($item->struk_tanggal)) }}
+                                        </td>
                                     </tr>
-                                @endfor
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -45,4 +50,15 @@
             </div>
         </div>
     </div>
+    <script>
+        function getsetprint() {
+            // print datalist to pdf
+            var printContents = document.getElementById('datalist').innerHTML;
+            var originalContents = document.body.innerHTML;
+            document.body.innerHTML = printContents;
+            window.print();
+            document.body.innerHTML = originalContents;
+
+        }
+    </script>
 @endsection

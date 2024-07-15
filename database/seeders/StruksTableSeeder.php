@@ -14,6 +14,7 @@ class StruksTableSeeder extends Seeder
 
         for ($i = 0; $i < 10; $i++) {
             DB::table('struks')->insert([
+                // 'id'=>$i+1,
                 'id_toko' => rand(1, 10),
                 'nama_sales' => $faker->name,
                 'status' => $faker->randomElement(['in', 'out']),

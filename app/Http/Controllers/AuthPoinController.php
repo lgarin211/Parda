@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\DataController;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redis;
 
 class AuthPoinController extends Controller
 {
@@ -24,13 +25,38 @@ class AuthPoinController extends Controller
         return view('Admin.OwnerForm');
     }
 
-    public function Laporan() {
-        $laporan=self::$data->PenjualanData()->where('penjualans.id_toko',session('user')->id_toko)->get();
-        dump($laporan);
-        return view('Owener.Laporan');
+    public function Laporan(Request $request) {
+        // dd(session('user')->id_toko);
+        $tanggalTerdesia=[];
+        $totalBesa=[];
+        if($request->month)
+        {
+            $month= date('m', strtotime($request->month));
+            $laporan=self::$data->PenjualanData()->where('toko_id',session('user')->id_toko)->whereMonth(
+                'penjualan_tanggal', $month
+                )->get();
+            $totaal=0;
+            foreach ($laporan as $key => $value) {
+                $tanggalTerdesia[]=$value->penjualan_tanggal;
+                if(!in_array($value->penjualan_tanggal,$tanggalTerdesia)){
+                    $tanggalTerdesia[]=$value->penjualan_tanggal;
+                }
+            }
+            // dd($laporan);
+            return view('Owener.Laporan',compact('laporan','tanggalTerdesia','totalBesa'));
+        }else{
+            $laporan=self::$data->PenjualanData()->where('toko_id',session('user')->id_toko)->get();
+        }
+
+        return view('Owener.Laporan',compact('laporan','tanggalTerdesia','totalBesa'));
     }
 
-    public function DetailLaporan() {
+    public function DetailLaporan(Request $request) {
+        if($request->tgl){
+            $laporan=self::$data->PenjualanData()->where('toko_id',session('user')->id_toko)->where('penjualan_tanggal',$request->tgl)->get();
+            // dd($laporan);
+            return view('Owener.LaporanDetail',compact('laporan'));
+        }
         return view('Owener.LaporanDetail');
     }
 
@@ -52,9 +78,7 @@ class AuthPoinController extends Controller
     }
 
     public function BarangMasuk() {
-        // dd(session('user'));
         $dataBarang=self::$data->getInventories()->where('id_toko',session('user')->id_toko)->paginate(5);
-        // dump(session('user'),$data);
         return view('Admin.BarangMasuk', compact('dataBarang'));
     }
 
@@ -77,6 +101,7 @@ class AuthPoinController extends Controller
                 'nama_produk'=>$request->name,
             ];
             $barang=self::$data->getInventories()->where($req)->first();
+            // dd($barang);
             if($barang){
                 $pw=(session('barang'))?session('barang'):[];
                 $barang->jumlah=$request->qty;

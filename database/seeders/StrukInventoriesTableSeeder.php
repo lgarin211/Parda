@@ -14,7 +14,7 @@ class StrukInventoriesTableSeeder extends Seeder
 
         for ($i = 0; $i < 10; $i++) {
             DB::table('struk_inventories')->insert([
-                'id_struk' => $faker->unique()->randomNumber(), // Unique random number
+                'id_struk' => $i+1, // Unique random number
                 'id_produk' => rand(1, 10),
                 'status' => $faker->randomElement(['in', 'out']),
                 'tgl_masuk_barang' => $faker->date,

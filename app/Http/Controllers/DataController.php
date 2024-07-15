@@ -10,11 +10,7 @@ class DataController extends Controller
 
     public function PenjualanData()
     {
-       $data= DB::table('penjualans')
-       ->join('penjualan_produks', 'penjualans.id_penjualan_produks', '=', 'penjualan_produks.id')
-       ->join('inventories', 'penjualan_produks.id_inventory', '=', 'inventories.id')
-       ->join('produks', 'inventories.id_produk', '=', 'produks.id')
-       ->join('struk_inventories', 'penjualans.id_jual', '=', 'struk_inventories.id_penjualan');
+       $data= DB::table('penjualan_c');
         return $data;
     }
     // DataUser Login
