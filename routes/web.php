@@ -28,5 +28,4 @@ Route::any('/SalesForm', [AuthPoinController::class, 'SalesForm'])->name('SalesF
 Route::any('/OwnerForm', [AuthPoinController::class, 'OwnerForm'])->name('OwnerForm');
 Route::any('/Laporan', [AuthPoinController::class, 'Laporan'])->name('Laporan');
 Route::any('/DetailLaporan', [AuthPoinController::class, 'DetailLaporan'])->name('DetailLaporan');
-
 Route::any('/Datalist', [AuthPoinController::class, 'Datalist'])->name('Datalist');

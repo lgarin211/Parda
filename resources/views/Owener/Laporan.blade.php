@@ -50,7 +50,8 @@
                             <div class="card col-12">
                                 <div class="card-body">
                                     <h5 class="card-title">Day {{ $i + 1 }}</h5>
-                                    <p class="card-text">sales poin in day {{ $i + 1 }} is $</p>
+                                    <p class="card-text">sales poin in day {{ $i + 1 }} </p>
+                                    {{}}
                                     <a href="#" class="card-link">Employe</a>
                                     <a href="{{ url('/DetailLaporan') }}?tgl={{ $laporan[$i]->penjualan_tanggal }}"
                                         class="card-link btn btn-primary">See Detail</a>

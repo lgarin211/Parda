@@ -26,9 +26,8 @@ class AuthPoinController extends Controller
     }
 
     public function Laporan(Request $request) {
-        // dd(session('user')->id_toko);
         $tanggalTerdesia=[];
-        $totalBesa=[];
+        $totalpemasukanHrian=[];
         if($request->month)
         {
             $month= date('m', strtotime($request->month));
@@ -38,17 +37,16 @@ class AuthPoinController extends Controller
             $totaal=0;
             foreach ($laporan as $key => $value) {
                 $tanggalTerdesia[]=$value->penjualan_tanggal;
-                if(!in_array($value->penjualan_tanggal,$tanggalTerdesia)){
-                    $tanggalTerdesia[]=$value->penjualan_tanggal;
-                }
             }
-            // dd($laporan);
-            return view('Owener.Laporan',compact('laporan','tanggalTerdesia','totalBesa'));
+            $tanggalTerdesia=array_unique($tanggalTerdesia);
+
+            // dd($laporan,$tanggalTerdesia);
+            return view('Owener.Laporan',compact('laporan','tanggalTerdesia','totalpemasukanHrian'));
         }else{
             $laporan=self::$data->PenjualanData()->where('toko_id',session('user')->id_toko)->get();
         }
 
-        return view('Owener.Laporan',compact('laporan','tanggalTerdesia','totalBesa'));
+        return view('Owener.Laporan',compact('laporan','tanggalTerdesia','totalBesa','totalpemasukanHrian'));
     }
 
     public function DetailLaporan(Request $request) {
