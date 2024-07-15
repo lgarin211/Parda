@@ -31,10 +31,11 @@ class AuthPoinController extends Controller
         if($request->month)
         {
             $month= date('m', strtotime($request->month));
-            $laporan=self::$data->PenjualanData()->where('toko_id',session('user')->id_toko)->whereMonth(
+            $laporan=self::$data->PenjualanData()->whereMonth(
                 'penjualan_tanggal', $month
                 )->get();
             $totaal=0;
+            // dd($laporan);
             foreach ($laporan as $key => $value) {
                 $tanggalTerdesia[]=$value->penjualan_tanggal;
             }
@@ -51,7 +52,7 @@ class AuthPoinController extends Controller
 
     public function DetailLaporan(Request $request) {
         if($request->tgl){
-            $laporan=self::$data->PenjualanData()->where('toko_id',session('user')->id_toko)->where('penjualan_tanggal',$request->tgl)->get();
+            $laporan=self::$data->PenjualanData()->where('penjualan_tanggal',$request->tgl)->get();
             // dd($laporan);
             return view('Owener.LaporanDetail',compact('laporan'));
         }
