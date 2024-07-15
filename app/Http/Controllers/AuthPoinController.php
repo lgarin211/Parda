@@ -76,13 +76,44 @@ class AuthPoinController extends Controller
         return view('Register');
     }
 
-    public function BarangMasuk() {
-        $dataBarang=self::$data->getInventories()->where('id_toko',session('user')->id_toko)->paginate(5);
+    public function BarangMasuk(Request $request) {
+
+        if ($request->isMethod('post')) {
+            // dd($request->all());
+            $id=rand(100,99999);
+            $reqProduk=[
+                'id'=>$id,
+                'nama_produk'=>$request->NamaBarang,
+                'harga'=>$request->harga,
+                'created_at'=>date('Y-m-d H:i:s'),
+                'updated_at'=>date('Y-m-d H:i:s'),
+            ];
+            $reqinventory=[
+                'id_toko'=>session('user')->id_toko,
+                'id_produk'=>$id,
+                'satuan'=>$request->satuan,
+                'stock_tersedia'=>$request->Stock,
+                'stock_masuk'=>$request->Stock,
+                'stock_keluar'=>0,
+                'created_at'=>date('Y-m-d H:i:s'),
+                'updated_at'=>date('Y-m-d H:i:s'),
+            ];
+            try {
+                DB::table('produks')->insert($reqProduk);
+                DB::table('inventories')->insert($reqinventory);
+            } catch (\Throwable $th) {
+                dd($th);
+                return redirect()->back();
+            }
+        }
+
+        $dataBarang=self::$data->getInventories()->where('id_toko',session('user')->id_toko)->get();
+
         return view('Admin.BarangMasuk', compact('dataBarang'));
     }
 
     public function Barang() {
-        $dataBarang=self::$data->getInventories()->where('id_toko',session('user')->id_toko)->paginate(5);
+        $dataBarang=self::$data->getInventories()->where('id_toko',session('user')->id_toko)->get();
         return view('Admin.Barang', compact('dataBarang'));
     }
 
