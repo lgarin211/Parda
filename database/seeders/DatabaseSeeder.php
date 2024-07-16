@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call([
-            // RolesTableSeeder::class,
+            RolesTableSeeder::class,
             // UsersTableSeeder::class,
             // UserRolesTableSeeder::class,
             // TokosTableSeeder::class,
@@ -36,7 +36,7 @@ class DatabaseSeeder extends Seeder
             // RetureInventoriesTableSeeder::class,
             // StrukInventoriesTableSeeder::class,
             // StruksTableSeeder::class,
-            DataSetSedder::class,
+            // DataSetSedder::class,
         ]);
     }
 }
