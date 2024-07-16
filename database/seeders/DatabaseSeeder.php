@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use DataSetSedder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -20,20 +22,21 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call([
-            RolesTableSeeder::class,
-            UsersTableSeeder::class,
-            UserRolesTableSeeder::class,
-            TokosTableSeeder::class,
-            PenjualansTableSeeder::class,
-            PenjualanProduksTableSeeder::class,
-            ProduksTableSeeder::class,
-            UserTokosTableSeeder::class,
-            InventoriesTableSeeder::class,
-            PenjualanProduksTableSeeder::class,
-            PenjualanReturnsTableSeeder::class,
-            RetureInventoriesTableSeeder::class,
-            StrukInventoriesTableSeeder::class,
-            StruksTableSeeder::class,
+            // RolesTableSeeder::class,
+            // UsersTableSeeder::class,
+            // UserRolesTableSeeder::class,
+            // TokosTableSeeder::class,
+            // PenjualansTableSeeder::class,
+            // PenjualanProduksTableSeeder::class,
+            // ProduksTableSeeder::class,
+            // UserTokosTableSeeder::class,
+            // InventoriesTableSeeder::class,
+            // PenjualanProduksTableSeeder::class,
+            // PenjualanReturnsTableSeeder::class,
+            // RetureInventoriesTableSeeder::class,
+            // StrukInventoriesTableSeeder::class,
+            // StruksTableSeeder::class,
+            DataSetSedder::class,
         ]);
     }
 }

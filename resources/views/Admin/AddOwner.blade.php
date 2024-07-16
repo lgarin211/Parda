@@ -10,7 +10,7 @@
     <div class="card-body">
         <div class="col-12">
             <h3>
-                Add Employe
+                Add Owner
             </h3>
             <ul class="list-group list-group-flush">
                 <div class="row">
