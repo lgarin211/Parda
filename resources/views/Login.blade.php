@@ -1,4 +1,4 @@
-@extends('Templates.layout')
+@extends('Templates.Layout')
 @section('content')
     <div class="container">
         <div class="row justify-content-center align-items-center" style="height: 100dvh;">
