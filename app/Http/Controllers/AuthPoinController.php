@@ -214,7 +214,12 @@ class AuthPoinController extends Controller
 
 
 
-    public function RegisterViewPoin() {
+    public function RegisterViewPoin(Request $request) {
+        if($request->isMethod('post')){
+            $dc=new DC();
+            $dc->storeUser($request);
+            return redirect()->route('login');
+        }
         return view('Register');
     }
 

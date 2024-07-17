@@ -6,13 +6,14 @@
                 <div class="col-12 text-center">
                     <h1>Register</h1>
                 </div>
-                <form action="">
+                <form action="" method="POST">
+                    @csrf
                     <div class="row align-items-center justify-content-center">
                         {{-- input Nama --}}
                         <div class="col-12">
                             <div class="form-group mt-3">
                                 <label for="nama">Nama</label>
-                                <input type="text" class="form-control" id="nama" placeholder="Nama">
+                                <input type="text" class="form-control" name="name" id="nama" placeholder="Nama">
                             </div>
                         </div>
 
@@ -20,14 +21,16 @@
                         <div class="col-12">
                             <div class="form-group mt-3">
                                 <label for="email">Email</label>
-                                <input type="email" class="form-control" id="email" placeholder="Email">
+                                <input type="email" class="form-control" name="email" id="email"
+                                    placeholder="Email">
                             </div>
                         </div>
                         {{-- input password --}}
                         <div class="col-12">
                             <div class="form-group mt-3">
                                 <label for="password">Password</label>
-                                <input type="password" class="form-control" id="password" placeholder="Password">
+                                <input type="password" name="password" class="form-control" id="password"
+                                    placeholder="Password">
                             </div>
                         </div>
 
@@ -35,14 +38,15 @@
                         <div class="col-12">
                             <div class="form-group mt-3">
                                 <label for="nama_toko">Nama Toko</label>
-                                <textarea class="form-control" id="nama_toko" rows="3"></textarea>
+                                <textarea class="form-control" name="nama_toko" id="nama_toko" rows="3"></textarea>
                             </div>
                         </div>
 
                         {{-- button login --}}
                         <div class="col-12">
                             <div class="form-group mt-3">
-                                <a href="{{ route('employe') }}" class="btn btn-primary col-12">Login</a>
+                                {{-- <a href="{{ route('employe') }}" class="btn btn-primary col-12">Login</a> --}}
+                                <button type="submit" class="btn btn-primary col-12">Login</button>
                             </div>
                         </div>
 

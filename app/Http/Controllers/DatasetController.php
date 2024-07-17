@@ -4,27 +4,31 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class DatasetController extends Controller
 {
     // Functions for nusers table
     public function storeUser(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:nusers,email',
-            'password' => 'required|string|min:8',
-            'role' => 'required|string|in:customer,employee,owner',
-        ]);
+        // $request->validate([
+        //     'name' => 'required|string|max:255',
+        //     'email' => 'required|email|unique:nusers,email',
+        //     'password' => 'required|string|min:8',
+        //     'role' => 'required|string|in:customer,employee,owner',
+        // ]);
 
         $user = DB::table('nusers')->insertGetId([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => bcrypt($request->password),
-            'role' => $request->role,
+            'password' => Hash::make($request->password),
+            'role' => 'owner',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+
+        // insert new owner to nowners table
+        $this->storeOwner($request, $user);
 
         return $user;
     }
@@ -335,18 +339,17 @@ class DatasetController extends Controller
     }
 
     // Functions for nowners table
-    public function storeOwner(Request $request)
+    public function storeOwner(Request $request, $id)
     {
-        $request->validate([
-            'nama_pemilik' => 'required|string|max:255',
-            'inisialisasi' => 'required|string|max:255',
-            'images' => 'required|string|max:255',
-        ]);
+        // $request->validate([
+        //     'nama_pemilik' => 'required|string|max:255',
+        //     'inisialisasi' => 'required|string|max:255',
+        //     'images' => 'required|string|max:255',
+        // ]);
 
         $owner = DB::table('nowners')->insertGetId([
-            'nama_pemilik' => $request->nama_pemilik,
-            'inisialisasi' => $request->inisialisasi,
-            'images' => $request->images,
+            'id_user' => $id,
+            'nama_toko' => $request->nama_toko,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
