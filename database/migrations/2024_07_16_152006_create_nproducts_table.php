@@ -10,6 +10,7 @@ class CreateNproductsTable extends Migration
     {
         Schema::create('nproducts', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('id_owner')->constrained('nusers')->onDelete('cascade');
             $table->string('nama_barang');
             $table->integer('tersedia'); // Corrected
             $table->string('images');

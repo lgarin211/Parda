@@ -31,7 +31,7 @@
                         Sales Input Item
                     </h3>
                     <ul class="list-group list-group-flush">
-                        <form method="POST">
+                        <form method="POST" action="{{ route('kasir') }}">
                             @csrf
                             <div class="row">
                                 <div class="col-12 mt-2">
@@ -92,17 +92,18 @@
                                     @if ($dsv)
                                         @foreach ($dsv as $i => $item)
                                             <tr>
-                                                <th scope="row">{{ $i }}</th>
-                                                <td>{{ $item->nama_produk }}</td>
+                                                <th scope="row">{{ $i + 1 }}</th>
+                                                <td>{{ $item->product_name }}</td>
                                                 <td>{{ $item->condition }}</td>
-                                                <td>{{ $item->harga }}</td>
+                                                <td>{{ $item->price }}</td>
                                                 <td>{{ $item->disc }}%</td>
                                                 <td>{{ $item->pricetotal }}</td>
                                                 <td>
                                                     <div class="row">
                                                         <button class="btn btn-warning" data-toggle="modal"
                                                             data-target="#CardSummeryPoin{{ $i }}">Edit</button>
-                                                        <button class="btn btn-danger">Delete</button>
+                                                        <a href="{{ route('kasir') }}?sessionpot={{ $i }}"
+                                                            class="btn btn-danger">Delete</a>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -127,7 +128,8 @@
 
 
 @section('content2')
-    @for ($i = 0; $i < 10; $i++)
+    @foreach ($dsv as $i => $item)
+        {{-- @dump($item) --}}
         <!-- Modal -->
         <div class="modal fade" id="CardSummeryPoin{{ $i }}" tabindex="-1"
             aria-labelledby="CardSummeryPoin{{ $i }}Label" aria-hidden="true">
@@ -140,7 +142,60 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        ...
+                        @php
+                            $ilis = session('barang');
+                            $ili = $ilis[$i];
+                        @endphp
+                        {{-- @dump($ili) --}}
+                        <div class="card-body">
+                            <div class="col-12">
+                                <h3>
+                                    Sales Input Item
+                                </h3>
+                                <ul class="list-group list-group-flush">
+                                    <form method="POST" action="{{ route('kasir') }}">
+                                        @csrf
+                                        @method('PUT')
+                                        <input type="hidden" name="tager" value="{{ $i }}">
+                                        <div class="row">
+                                            <div class="col-12 mt-2">
+                                                <label for="name">
+                                                    Name Produk
+                                                </label>
+                                                <input name="name" type="text" class="col-12 form-control"
+                                                    placeholder="Enter Item Name" value="{{ $ili->product_name }}"
+                                                    readonly>
+                                            </div>
+                                            <div class="col-12 mt-2">
+                                                <label for="">
+                                                    Quality
+                                                </label>
+                                                <input name="qua" type="text" class="col-12 form-control"
+                                                    placeholder="Enter Item Quality" value="{{ $ili->condition }}">
+                                            </div>
+                                            <div class="col-12 mt-2">
+                                                <label for="">
+                                                    Quantity
+                                                </label>
+                                                <input name="qty" type="text" class="col-12 form-control"
+                                                    placeholder="Enter Item Quantity" value="{{ $ili->jumlah }}">
+                                            </div>
+                                            <div class="col-12 mt-2">
+                                                <label for="">
+                                                    Discount
+                                                </label>
+                                                <input name="dis" value="0" type="number"
+                                                    class="col-12 form-control" placeholder="Enter Item Discount(%)"
+                                                    value="{{ $ili->disc }}">
+                                            </div>
+                                            <div class="col-12">
+                                                <button class="btn btn-primary col-12 mt-2" type="submit">Submit</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -149,7 +204,9 @@
                 </div>
             </div>
         </div>
-    @endfor
+    @endforeach
+
+
     <div class="modal fade" id="ModalTagPoinofCekhout" tabindex="-1" aria-labelledby="ModalTagPoinofCekhoutLabel"
         aria-hidden="true">
         <div class="modal-dialog">

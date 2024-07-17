@@ -53,7 +53,7 @@ class DatasetController extends Controller
 
     public function deleteUser($id)
     {
-        DB::table('nusers')->where('id', $id)->delete();
+        DB::table('nusers')->where('id', $id)->update(['sofdelete'=>1]);
 
         return 'User with ID ' . $id . ' deleted successfully';
     }
@@ -61,140 +61,120 @@ class DatasetController extends Controller
     // Functions for nproducts table
     public function storeProduct(Request $request)
     {
-        $request->validate([
-            'nama_barang' => 'required|string|max:255',
-            'tersedia' => 'required|integer',
-            'harga' => 'required|numeric',
-            'satuan' => 'required|string|max:255',
-            'images' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // validate image file
-        ]);
 
-        // Handle file upload
-        if ($request->hasFile('images')) {
-            // Get file name with extension
-            $fileNameWithExt = $request->file('images')->getClientOriginalName();
+        $req=[
+            'nama_barang' => $request->namaBarang,
+            'tersedia' => $request->jumlahBarang,
+            'harga' => $request->hargaBarang,
+            'satuan' => $request->satuan,
+            'images' => $request->photoBarang,
+            'id_user' => session('user')->id_pengguna,
+        ];
+        $request->merge($req);
+        // $request->validate([
+        //     'nama_barang' => 'required|string|max:255',
+        //     'tersedia' => 'required|integer',
+        //     'harga' => 'required|numeric',
+        //     'satuan' => 'required|string|max:255',
+        //     'images' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        // ]);
 
-            // Get just file name
+
+
+        if ($request->hasFile('photoBarang')) {
+            $fileNameWithExt = $request->file('photoBarang')->getClientOriginalName();
             $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
-
-            // Get just extension
-            $extension = $request->file('images')->getClientOriginalExtension();
-
-            // File name to store
+            $extension = $request->file('photoBarang')->getClientOriginalExtension();
             $fileNameToStore = $fileName.'_'.time().'.'.$extension;
-
-            // Upload image
-            $path = $request->file('images')->storeAs('public/images', $fileNameToStore);
+            $path = $request->file('photoBarang')->move(public_path('photoBarang'), $fileNameToStore);
         } else {
-            // Set a default image if no file is uploaded
-            $fileNameToStore = 'noimage.jpg'; // or whatever default image you want
+            $fileNameToStore = 'noimage.jpg';
         }
 
-        // Save product to database
         $product = DB::table('nproducts')->insertGetId([
+            'id_owner' => session('user')->id_pemilik,
             'nama_barang' => $request->nama_barang,
             'tersedia' => $request->tersedia,
             'harga' => $request->harga,
             'satuan' => $request->satuan,
-            'images' => $fileNameToStore, // Save the file name to database
+            'images' => $fileNameToStore,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
 
+        $request->merge(['id_produk' => $product]);
+        $purchase = $this->storePurchase($request);
+        // join $product and $purchase
+        $product = [
+            'product' => $product,
+            'purchase' => $purchase,
+        ];
+        // dd($product);
         return $product;
     }
 
 
     public function updateProduct(Request $request, $id)
     {
-        $request->validate([
-            'nama_barang' => 'string|max:255',
-            'tersedia' => 'integer',
-            'harga' => 'numeric',
-            'satuan' => 'string|max:255',
-            'images' => 'string|max:255',
-        ]);
-
         DB::table('nproducts')
             ->where('id', $id)
             ->update([
-                'nama_barang' => $request->nama_barang,
-                'tersedia' => $request->tersedia,
-                'harga' => $request->harga,
+                'nama_barang' => $request->namaBarang,
+                'tersedia' => $request->jumlahBarang,
+                'harga' => $request->hargaBarang,
                 'satuan' => $request->satuan,
-                'images' => $request->images,
                 'updated_at' => now(),
             ]);
-
+        $this->updatePurchase($request, $id);
         return $id;
     }
 
     public function deleteProduct($id)
     {
-        DB::table('nproducts')->where('id', $id)->delete();
-
+        DB::table('nproducts')->where('id', $id)->update(['sofdelete'=>1]);
+        $this->deletePurchase($id);
+        $this->deleteSale($id);
+        $this->deleteCartItem($id);
         return 'Product with ID ' . $id . ' deleted successfully';
     }
 
     // Functions for npurchases table
     public function storePurchase(Request $request)
     {
-        $request->validate([
-            'id_produk' => 'required|integer|exists:nproducts,id',
-            'id_user' => 'required|integer|exists:nusers,id',
-            'inisialisasi' => 'required|string|max:255',
-            'status_pembayaran' => 'required|string|max:255',
-            'jumlah_stok' => 'required|integer',
-            'jatuh_tempo' => 'required|date',
-            'total_harga' => 'required|numeric',
-        ]);
-
         $purchase = DB::table('npurchases')->insertGetId([
             'id_produk' => $request->id_produk,
             'id_user' => $request->id_user,
-            'inisialisasi' => $request->inisialisasi,
-            'status_pembayaran' => $request->status_pembayaran,
-            'jumlah_stok' => $request->jumlah_stok,
-            'jatuh_tempo' => $request->jatuh_tempo,
-            'total_harga' => $request->total_harga,
+            'inisialisasi' => "In",
+            'status_pembayaran' => $request->statusPembayaran,
+            'jumlah_stok' => $request->jumlahBarang,
+            'jatuh_tempo' => $request->jatuhTempo,
+            'total_harga' => $request->jumlahBarang * $request->harga,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
-
         return $purchase;
     }
 
     public function updatePurchase(Request $request, $id)
     {
-        $request->validate([
-            'id_produk' => 'integer|exists:nproducts,id',
-            'id_user' => 'integer|exists:nusers,id',
-            'inisialisasi' => 'string|max:255',
-            'status_pembayaran' => 'string|max:255',
-            'jumlah_stok' => 'integer',
-            'jatuh_tempo' => 'date',
-            'total_harga' => 'numeric',
-        ]);
-
+        $tag=($request->jumlahBarang==0)?"Return":"In";
         DB::table('npurchases')
-            ->where('id', $id)
-            ->update([
-                'id_produk' => $request->id_produk,
-                'id_user' => $request->id_user,
-                'inisialisasi' => $request->inisialisasi,
-                'status_pembayaran' => $request->status_pembayaran,
-                'jumlah_stok' => $request->jumlah_stok,
-                'jatuh_tempo' => $request->jatuh_tempo,
-                'total_harga' => $request->total_harga,
-                'updated_at' => now(),
-            ]);
+        ->where('id_produk', $id)
+        ->update([
+            'status_pembayaran' => $request->statusPembayaran,
+            'jumlah_stok' => $request->jumlahBarang,
+            'jatuh_tempo' => $request->jatuhTempo,
+            'total_harga' => $request->jumlahBarang * $request->hargaBarang,
+            'updated_at' => now(),
+            'inisialisasi' => $tag,
+        ]);
 
         return $id;
     }
 
     public function deletePurchase($id)
     {
-        DB::table('npurchases')->where('id', $id)->delete();
+        DB::table('npurchases')->where('id_produk', $id)->update(['sofdelete'=>1]);
 
         return 'Purchase with ID ' . $id . ' deleted successfully';
     }
@@ -241,7 +221,7 @@ class DatasetController extends Controller
 
     public function deleteSale($id)
     {
-        DB::table('nsales')->where('id', $id)->delete();
+        DB::table('nsales')->where('id_produk', $id)->update(['sofdelete'=>1]);
 
         return 'Sale with ID ' . $id . ' deleted successfully';
     }
@@ -300,7 +280,7 @@ class DatasetController extends Controller
 
     public function deleteCartItem($id)
     {
-        DB::table('ncart_items')->where('id', $id)->delete();
+        DB::table('ncart_items')->where('id', $id)->update(['sofdelete'=>1]);
 
         return 'Cart item with ID ' . $id . ' deleted successfully';
     }
@@ -349,7 +329,7 @@ class DatasetController extends Controller
 
     public function deleteEmployee($id)
     {
-        DB::table('nemployees')->where('id', $id)->delete();
+        DB::table('nemployees')->where('id', $id)->update(['sofdelete'=>1]);
 
         return 'Employee with ID ' . $id . ' deleted successfully';
     }
@@ -396,7 +376,7 @@ class DatasetController extends Controller
 
     public function deleteOwner($id)
     {
-        DB::table('nowners')->where('id', $id)->delete();
+        DB::table('nowners')->where('id', $id)->update(['sofdelete'=>1]);
 
         return 'Owner with ID ' . $id . ' deleted successfully';
     }

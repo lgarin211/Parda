@@ -9,8 +9,7 @@
     </div>
     <div class="card-body">
         <div class="col-5 mb-2">
-            <button type="button" class="btn btn-primary col-12" data-toggle="modal"
-                data-target="#modalTambahBarang">Tambah Barang</button>
+            <a class="btn btn-primary col-12" href="{{ Route('BarangMasuk') }}?newla=n">Tambah Barang</a>
         </div>
         <div class="col-12">
             <ul class="list-group list-group-flush">
@@ -28,6 +27,7 @@
                         </thead>
                         <tbody class="mt-1">
                             @foreach ($dataBarang as $i => $item)
+                                {{-- @dump($item) --}}
                                 {{-- @dd($item) --}}
                                 <tr>
                                     <th scope="row">{{ $i + 1 }}</th>
@@ -36,10 +36,14 @@
                                     <td>{{ $item->unit }}</td>
                                     <td>{{ $item->price }}</td>
                                     <td>
-                                        <div class="row">
-                                            <button class="btn btn-warning p-1">Edit</button>
-                                            <button class="btn btn-danger p-2">Delete</button>
-                                        </div>
+                                        <form class="row" method="POST">
+                                            @csrf
+                                            @method('delete')
+                                            <a class="btn btn-warning p-1"
+                                                href="{{ Route('BarangMasuk') }}?newla={{ $item->id }}">Edit</a>
+                                            <input type="hidden" name="newl" value="{{ $item->id }}">
+                                            <button type="submit" class="btn btn-danger p-2">Delete</button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach

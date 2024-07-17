@@ -16,7 +16,7 @@
         class="dropdown-toggle">Penjualan <i class="bi bi-arrow-down-square"></i> </a>
     <ul class="collapse list-unstyled" id="penjualanSubmenu">
         <li class="nav-item">
-            <a class="nav-link ml-2" href="{{ route('kasir') }}"><i class="far fa-circle nav-icon"></i> Kasir</a>
+            <a class="nav-link ml-2" href="{{ route('kasir') }}?fil=1"><i class="far fa-circle nav-icon"></i> Kasir</a>
         </li>
         {{-- <li class="nav-item">
             <a class="nav-link ml-2" href="{{ route('kasir') }}"><i class="far fa-circle nav-icon"></i> Reture</a>
