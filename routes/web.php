@@ -15,7 +15,7 @@ use App\Http\Controllers\AuthPoinController;
 */
 
 Route::get('/', function () {
-    return view('Templates.LTELayout');
+    return view('Templates.InventLayout');
 });
 
 Route::any('/login', [AuthPoinController::class, 'LoginViewPoin'])->name('login');

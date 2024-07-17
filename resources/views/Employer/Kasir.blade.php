@@ -1,4 +1,4 @@
-@extends('Templates.LTELayout')
+@extends('Templates.InventLayout')
 @section('header')
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -197,10 +197,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
                 </div>
             </div>
         </div>
@@ -218,11 +214,54 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    ...
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">no</th>
+                                <th scope="col">item</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @php
+                                $setlist = session('barang');
+                                $total = 0;
+
+                            @endphp
+                            @if (!empty($setlist))
+                                @foreach ($setlist as $i => $item)
+                                    <tr>
+                                        <th scope="row">{{ $i + 1 }}</th>
+                                        <td>{{ $item->product_name }}</td>
+                                        <td>{{ $item->jumlah }}</td>
+                                        <td>RP. {{ $item->price }}</td>
+                                        <td>{{ $item->pricetotal }}</td>
+                                    </tr>
+                                    @php
+                                        $total += $item->pricetotal;
+                                    @endphp
+                                @endforeach
+                            @endif
+                        </tbody>
+                    </table>
+                    <div class="total">
+                        <h4>
+                            Total : RP. {{ $total }}
+                        </h4>
+                        <h4>
+                            Tax (11%): RP. {{ $total * 0.11 }}
+                        </h4>
+                        <h4>
+                            Discount : (5% if > 2.000.000); Rp {{ $total > 2000000 ? $total * 0.05 : $total }}
+                        </h4>
+                        <h3>
+                            Final Total : RP. {{ $total + $total * 0.11 - ($total > 2000000 ? $total * 0.05 : 0) }}
+                        </h3>
+
+                        <a href="{{ route('kasir') }}?fil=1" class="col-12 btn btn-primary">Bayar</a>
+                    </div>
                 </div>
             </div>
         </div>

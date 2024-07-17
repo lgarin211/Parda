@@ -27,10 +27,18 @@
         class="dropdown-toggle">Access Controller <i class="bi bi-arrow-down-square"></i></a>
     <ul class="collapse list-unstyled" id="accountSubmenu2">
         <li class="nav-item">
-            <a class="nav-link ml-2" href="{{ route('OwenerAccess') }}"><i class="far fa-circle nav-icon"></i> Data
-                Owner</a>
-            <a class="nav-link ml-2" href="{{ route('Laporan') }}"><i class="far fa-circle nav-icon"></i>
-                Laporan</a>
+            @dump(session('user'))
+            @if (session('user')->role == 'Admin')
+                <a class="nav-link ml-2" href="{{ route('OwenerAccess') }}"><i class="far fa-circle nav-icon"></i> Data
+                    Owner</a>
+                <a class="nav-link ml-2" href="{{ route('Laporan') }}"><i class="far fa-circle nav-icon"></i>
+                    Laporan</a>
+            @elseif (session('user')->role == 'owner')
+                <a class="nav-link ml-2" href="{{ route('UserAccess') }}"><i class="far fa-circle nav-icon"></i> Data
+                    Employer</a>
+                <a class="nav-link ml-2" href="{{ route('Laporan') }}"><i class="far fa-circle nav-icon"></i>
+                    Laporan</a>
+            @endif
         </li>
 
     </ul>

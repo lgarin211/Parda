@@ -16,6 +16,7 @@ class CreateNproductsTable extends Migration
             $table->string('images');
             $table->string('satuan');
             $table->decimal('harga', 10, 2);
+            $table->boolean('sofdelete')->nullable();
             $table->timestamps();
         });
     }

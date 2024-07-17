@@ -1,4 +1,4 @@
-@extends('Templates.LTELayout')
+@extends('Templates.InventLayout')
 @section('header')
     <!-- Content Header (Page header) -->
     <section class="content-header">

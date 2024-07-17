@@ -21,19 +21,22 @@
                             </tr>
                         </thead>
                         <tbody class="mt-1">
-                            @for ($i = 0; $i < 10; $i++)
+                            @foreach ($dataOwner as $i => $item)
+                                {{-- @dd($item); --}}
                                 <tr>
-                                    <th scope="row">{{ $i }}</th>
-                                    <td>{{ fake()->name }}</td>
-                                    <td>{{ fake()->name }}</td>
+                                    <th scope="row">{{ $item->nama_pengguna }}</th>
+                                    <td>{{ $item->nama_toko }}</td>
+                                    <td>{{ '********' }}</td>
                                     <td>
                                         <div class="row">
-                                            <a href="{{ route('OwnerForm') }}" class="btn btn-warning">Edit</a>
-                                            <a href="#" class="btn btn-danger">Delete</a>
+                                            <a href="{{ route('OwenerAccess', ['id' => $item->id_pengguna]) }}"
+                                                class="btn btn-warning">Edit</a>
+                                            <a href="{{ route('OwenerAccess', ['idd' => $item->id_pengguna]) }}"
+                                                class="btn btn-danger">Delete</a>
                                         </div>
                                     </td>
                                 </tr>
-                            @endfor
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

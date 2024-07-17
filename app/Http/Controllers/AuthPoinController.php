@@ -131,13 +131,42 @@ class AuthPoinController extends Controller
         return view('Employer.Kasir',compact('dsv'));
     }
 
-    // public function SalesForm() {
-    //     return view('Admin.SalesForm');
-    // }
+
+    public function OwnerAccess(Request $request) {
+        $dataOwner=DB::table('all_data_owner')->get();
+        if($request->isMethod('put')){
+            // dd($request->all());
+            $data1=[
+                'name'=>$request->newOwnerName,
+                'password'=>Hash::make($request->newPassword),
+            ];
+            $data2=[
+                'nama_toko'=>$request->newShopName,
+            ];
+
+            $dataOwner=DB::table('nusers')->where('id',$request->id_pengguna)->update($data1);
+            $toko=DB::table('nowners')->where('id_user',$request->id_pengguna)->update($data2);
+            // dd($dataOwner,$toko);
+            return redirect()->route('OwenerAccess');
+        }
+
+        if($request->id){
+            $dataOwner=DB::table('all_data_owner')->where('id_pengguna',$request->id)->first();
+            return view('Admin.OwnerForm', compact('dataOwner'));
+        }
+
+        return view('Admin.OwenerAccess', compact('dataOwner'));
+    }
 
     // public function OwnerForm() {
     //     return view('Admin.OwnerForm');
     // }
+
+    // public function SalesForm() {
+    //     return view('Admin.SalesForm');
+    // }
+
+
 
     // public function Laporan(Request $request) {
     //     $tanggalTerdesia=[];
@@ -183,9 +212,6 @@ class AuthPoinController extends Controller
 
 
 
-    // public function OwnerAccess() {
-    //     return view('Admin.OwenerAccess');
-    // }
 
 
     // public function Datalist() {

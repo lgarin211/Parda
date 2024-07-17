@@ -1,4 +1,4 @@
-@extends('Templates.LTELayout')
+@extends('Templates.InventLayout')
 @section('content')
     <div class="card mt-5">
         <div class="card-header">

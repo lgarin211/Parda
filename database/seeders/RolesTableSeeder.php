@@ -16,16 +16,16 @@ class RolesTableSeeder extends Seeder
         $faker = Faker::create();
 
         // Seed Nusers table
-        // for ($i = 0; $i < 5; $i++) {
-        //     DB::table('nusers')->insert([
-        //         'name' => $faker->name,
-        //         'email' => $faker->unique()->safeEmail,
-        //         'password' => Hash::make('password'),
-        //         'role' => $faker->randomElement(['Admin', 'owner', 'employee']),
-        //         'created_at' => now(),
-        //         'updated_at' => now(),
-        //     ]);
-        // }
+        for ($i = 0; $i < 5; $i++) {
+            DB::table('nusers')->insert([
+                'name' => $faker->name,
+                'email' => $faker->unique()->safeEmail,
+                'password' => Hash::make('password'),
+                'role' => $faker->randomElement(['Admin', 'owner', 'employee']),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
 
         // Seed Nproducts table
         for ($i = 0; $i < 10; $i++) {
@@ -36,6 +36,7 @@ class RolesTableSeeder extends Seeder
                 'images' => $faker->imageUrl(),
                 'satuan' => $faker->randomElement(['pcs', 'box', 'kg']),
                 'harga' => $faker->randomFloat(2, 1, 1000),
+                'sofdelete' => NULL,
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
@@ -82,24 +83,24 @@ class RolesTableSeeder extends Seeder
         }
 
         // Seed Nowners table
-        // for ($i = 0; $i < 5; $i++) {
-        //     DB::table('nowners')->insert([
-        //         'nama_toko' => $faker->company,
-        //         'id_user' => $faker->numberBetween(1, 5),
-        //         'created_at' => now(),
-        //         'updated_at' => now(),
-        //     ]);
-        // }
+        for ($i = 0; $i < 5; $i++) {
+            DB::table('nowners')->insert([
+                'nama_toko' => $faker->company,
+                'id_user' => $faker->numberBetween(1, 5),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
 
         // Seed Nemployees table
-        // for ($i = 0; $i < 5; $i++) {
-        //     DB::table('nemployees')->insert([
-        //         'id_owner' => $faker->numberBetween(1, 5),
-        //         'id_user' => $faker->numberBetween(1, 5),
-        //         'created_at' => now(),
-        //         'updated_at' => now(),
-        //     ]);
-        // }
+        for ($i = 0; $i < 5; $i++) {
+            DB::table('nemployees')->insert([
+                'id_owner' => $faker->numberBetween(1, 5),
+                'id_user' => $faker->numberBetween(1, 5),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
     }
     public function run()
     {
