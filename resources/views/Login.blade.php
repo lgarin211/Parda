@@ -29,8 +29,7 @@
                         {{-- button login --}}
                         <div class="col-12">
                             <div class="form-group mt-3">
-                                <button type="submit" href="{{ Route('kasir') }}"
-                                    class="btn btn-primary col-12">Login</button>
+                                <button type="submit" class="btn btn-primary col-12">Login</button>
                             </div>
                         </div>
 

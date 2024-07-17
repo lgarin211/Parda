@@ -59,11 +59,11 @@
                     <div class="info">
                         <a href="#" class="d-block">
 
-                            @if (session('user')->nama_user)
+                            {{-- @if (session('user')->nama_user)
                                 {{ session('user')->nama_user }}
                             @else
                                 Arda
-                            @endif
+                            @endif --}}
                         </a>
                     </div>
                 </div>

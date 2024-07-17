@@ -8,9 +8,6 @@
             </div>
         </div>
         <div class="card-body">
-            <div class="col-5 mb-2">
-                <a href="#" class="btn btn-primary col-12">Tambah Barang</a>
-            </div>
             <div class="col-12">
                 <ul class="list-group list-group-flush">
                     <div class="row">
@@ -29,14 +26,22 @@
                             </thead>
                             <tbody class="mt-1">
                                 @foreach ($dataBarang as $i => $item)
+                                    {{-- @dd($item) --}}
                                     <tr>
                                         <th scope="row">{{ $i + 1 }}</th>
-                                        <td>{{ $item->nama_produk }}</td>
-                                        <td>{{ $item->stock_tersedia }}</td>
-                                        <td>{{ $item->satuan }}</td>
-                                        <td>{{ $item->harga }}</td>
-                                        <td>{{ $item->harga * $item->stock_tersedia }}</td>
-                                        <td>{{ $item->status = $item->stock_tersedia <= $item->stock_keluar ? 'Habis' : 'Tersedia' }}
+                                        <td>{{ $item->product_name }}</td>
+                                        <td>{{ $item->stock_purchased }}</td>
+                                        <td>{{ $item->unit }}</td>
+                                        <td>{{ $item->product_price }}</td>
+                                        <td>{{ $item->product_price * $item->stock_purchased }}</td>
+                                        <td>
+                                            @if ($item->initialization == 'In' && $item->stock_available > 0)
+                                                <span class="btn btn-success">Ready</span>
+                                            @elseif ($item->initialization == 'In' && $item->stock_available == 0)
+                                                <span class="btn btn-warning">Empty</span>
+                                            @elseif ($item->initialization == 'Return')
+                                                <span class="btn btn-danger">Return</span>
+                                            @endif
                                         </td>
                                         <td>
                                             <div class="row">
@@ -48,6 +53,13 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        <div class="mt-1 mb-1">
+                            <div class="row">
+                                <div class="col-12 justify-content-center   ">
+                                    {{ $dataBarang->links('pagination::bootstrap-5') }}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </ul>
             </div>

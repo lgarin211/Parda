@@ -28,12 +28,13 @@
                         </thead>
                         <tbody class="mt-1">
                             @foreach ($dataBarang as $i => $item)
+                                {{-- @dd($item) --}}
                                 <tr>
                                     <th scope="row">{{ $i + 1 }}</th>
-                                    <td>{{ $item->nama_produk }}</td>
-                                    <td>{{ $item->stock_tersedia }}</td>
-                                    <td>{{ $item->satuan }}</td>
-                                    <td>{{ $item->harga }}</td>
+                                    <td>{{ $item->product_name }}</td>
+                                    <td>{{ $item->stock_available }}</td>
+                                    <td>{{ $item->unit }}</td>
+                                    <td>{{ $item->price }}</td>
                                     <td>
                                         <div class="row">
                                             <button class="btn btn-warning p-1">Edit</button>
@@ -44,6 +45,13 @@
                             @endforeach
                         </tbody>
                     </table>
+                    <div class="mt-1 mb-1">
+                        <div class="row">
+                            <div class="col-12 justify-content-center   ">
+                                {{ $dataBarang->links('pagination::bootstrap-5') }}
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </ul>
         </div>

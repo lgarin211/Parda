@@ -21,14 +21,14 @@ class RolesTableSeeder extends Seeder
                 'name' => $faker->name,
                 'email' => $faker->unique()->safeEmail,
                 'password' => Hash::make('password'),
-                'role' => $faker->randomElement(['customer', 'owner', 'employee']),
+                'role' => $faker->randomElement(['Admin', 'owner', 'employee']),
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
         }
 
         // Seed Nproducts table
-        for ($i = 0; $i < 5; $i++) {
+        for ($i = 0; $i < 100; $i++) {
             DB::table('nproducts')->insert([
                 'nama_barang' => $faker->word,
                 'tersedia' => $faker->numberBetween(1, 100),
@@ -41,9 +41,9 @@ class RolesTableSeeder extends Seeder
         }
 
         // Seed Nsales table
-        for ($i = 0; $i < 5; $i++) {
+        for ($i = 0; $i < 100; $i++) {
             DB::table('nsales')->insert([
-                'id_produk' => $faker->numberBetween(1, 5),
+                'id_produk' => $faker->numberBetween(1, 100),
                 'id_user' => $faker->numberBetween(1, 5),
                 'total_harga_bersih' => $faker->randomFloat(2, 1, 1000),
                 'created_at' => now(),
@@ -52,7 +52,7 @@ class RolesTableSeeder extends Seeder
         }
 
         // Seed NcartItems table
-        for ($i = 0; $i < 5; $i++) {
+        for ($i = 0; $i < 100; $i++) {
             DB::table('ncart_items')->insert([
                 'id_penjualan' => $faker->numberBetween(1, 5),
                 'id_user' => $faker->numberBetween(1, 5),
@@ -66,9 +66,9 @@ class RolesTableSeeder extends Seeder
         }
 
         // Seed Npurchases table
-        for ($i = 0; $i < 5; $i++) {
+        for ($i = 0; $i < 500; $i++) {
             DB::table('npurchases')->insert([
-                'id_produk' => $faker->numberBetween(1, 5),
+                'id_produk' => $faker->numberBetween(1, 100),
                 'id_user' => $faker->numberBetween(1, 5),
                 'inisialisasi' => $faker->randomElement(['In', 'Return']),
                 'status_pembayaran' => $faker->randomElement(['Paid', 'Unpaid']),
