@@ -19,6 +19,7 @@ class AuthPoinController extends Controller
     {
         self::$data = new DataController();
     }
+
     public function index(){
         if(session('user')){
             if(session('user')->role=='owner'){
@@ -29,7 +30,6 @@ class AuthPoinController extends Controller
         }else{
             return redirect()->route('login');
         }
-        // return view('Templates.InventLayout');
     }
 
     // Admin
@@ -142,7 +142,6 @@ class AuthPoinController extends Controller
         return view('Employer.Kasir',compact('dsv'));
     }
 
-
     public function OwnerAccess(Request $request) {
         $dataOwner=DB::table('all_data_owner')->get();
         if($request->isMethod('put')){
@@ -169,55 +168,55 @@ class AuthPoinController extends Controller
         return view('Admin.OwenerAccess', compact('dataOwner'));
     }
 
-    // public function OwnerForm() {
-    //     return view('Admin.OwnerForm');
-    // }
+    public function OwnerForm() {
+        return view('Admin.OwnerForm');
+    }
 
-    // public function SalesForm() {
-    //     return view('Admin.SalesForm');
-    // }
-
-
-
-    // public function Laporan(Request $request) {
-    //     $tanggalTerdesia=[];
-    //     $totalpemasukanHrian=[];
-    //     if($request->month)
-    //     {
-    //         $month= date('m', strtotime($request->month));
-    //         $laporan=self::$data->PenjualanData()->whereMonth(
-    //             'penjualan_tanggal', $month
-    //             )->get();
-    //         $totaal=0;
-    //         // dd($laporan);
-    //         foreach ($laporan as $key => $value) {
-    //             $tanggalTerdesia[]=$value->penjualan_tanggal;
-    //         }
-    //         $tanggalTerdesia=array_unique($tanggalTerdesia);
-
-    //         // dd($laporan,$tanggalTerdesia);
-    //         return view('Owener.Laporan',compact('laporan','tanggalTerdesia','totalpemasukanHrian'));
-    //     }else{
-    //         $laporan=self::$data->PenjualanData()->where('toko_id',session('user')->id_toko)->get();
-    //     }
-
-    //     return view('Owener.Laporan',compact('laporan','tanggalTerdesia','totalpemasukanHrian'));
-    // }
-
-    // public function DetailLaporan(Request $request) {
-    //     if($request->tgl){
-    //         $laporan=self::$data->PenjualanData()->where('penjualan_tanggal',$request->tgl)->get();
-    //         // dd($laporan);
-    //         return view('Owener.LaporanDetail',compact('laporan'));
-    //     }
-    //     return view('Owener.LaporanDetail');
-    // }
+    public function SalesForm() {
+        return view('Admin.SalesForm');
+    }
 
 
 
-    // public function RegisterViewPoin() {
-    //     return view('Register');
-    // }
+    public function Laporan(Request $request) {
+        $tanggalTerdesia=[];
+        $totalpemasukanHrian=[];
+        if($request->month)
+        {
+            $month= date('m', strtotime($request->month));
+            $laporan=self::$data->PenjualanData()->whereMonth(
+                'penjualan_tanggal', $month
+                )->get();
+            $totaal=0;
+            // dd($laporan);
+            foreach ($laporan as $key => $value) {
+                $tanggalTerdesia[]=$value->penjualan_tanggal;
+            }
+            $tanggalTerdesia=array_unique($tanggalTerdesia);
+
+            // dd($laporan,$tanggalTerdesia);
+            return view('Owener.Laporan',compact('laporan','tanggalTerdesia','totalpemasukanHrian'));
+        }else{
+            $laporan=self::$data->PenjualanData()->where('toko_id',session('user')->id_toko)->get();
+        }
+
+        return view('Owener.Laporan',compact('laporan','tanggalTerdesia','totalpemasukanHrian'));
+    }
+
+    public function DetailLaporan(Request $request) {
+        if($request->tgl){
+            $laporan=self::$data->PenjualanData()->where('penjualan_tanggal',$request->tgl)->get();
+            // dd($laporan);
+            return view('Owener.LaporanDetail',compact('laporan'));
+        }
+        return view('Owener.LaporanDetail');
+    }
+
+
+
+    public function RegisterViewPoin() {
+        return view('Register');
+    }
 
 
 

@@ -25,7 +25,6 @@
                                     name="password">
                             </div>
                         </div>
-
                         {{-- button login --}}
                         <div class="col-12">
                             <div class="form-group mt-3">
