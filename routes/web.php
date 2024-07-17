@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthPoinController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,9 +15,7 @@ use App\Http\Controllers\AuthPoinController;
 |
 */
 
-Route::get('/', function () {
-    return view('Templates.InventLayout');
-});
+Route::get('/', AuthPoinController::class, 'index')->name('index');
 
 Route::any('/login', [AuthPoinController::class, 'LoginViewPoin'])->name('login');
 Route::any('/register', [AuthPoinController::class, 'RegisterViewPoin'])->name('register');

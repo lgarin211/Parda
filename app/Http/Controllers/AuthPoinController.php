@@ -19,7 +19,18 @@ class AuthPoinController extends Controller
     {
         self::$data = new DataController();
     }
-
+    public function index(){
+        if(session('user')){
+            if(session('user')->role=='owner'){
+                return redirect()->route('BarangMasuk');
+            }else{
+                return redirect()->route('kasir');
+            }
+        }else{
+            return redirect()->route('login');
+        }
+        // return view('Templates.InventLayout');
+    }
 
     // Admin
     public function LoginViewPoin(Request $request) {
